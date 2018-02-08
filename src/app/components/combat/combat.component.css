@@ -1,0 +1,11 @@
+.weapon {
+    opacity: .5;
+}
+
+.weapon.player {
+    cursor: pointer;
+}
+
+.weapon.selected {
+    opacity: 1;
+}

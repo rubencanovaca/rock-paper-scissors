@@ -1,6 +1,8 @@
-<section>
-    <div *ngFor="let player of players">
-        <div>{{player.name}}</div>
-        <div>{{player.score}}</div>
+<section class="row justify-content-center">
+    <div *ngFor="let player of players" class="col-5">
+        <div class="text-center">
+            <h4>{{player.name}}</h4>
+            <h2>{{player.score}}</h2>
+        </div>
     </div>
 </section>

@@ -1,5 +1,12 @@
-<section>
-    <h1>{{title}}</h1>
-</section>
-<app-history [players]="players"></app-history>
-<app-combat [players]="players"></app-combat>
+<div>
+    <header>
+        <h1 class="text-center">{{title}}</h1>
+    </header>
+    <div class="container-fluid">
+        <app-history [players]="players"></app-history>
+        <app-combat [players]="players"></app-combat>
+    </div>
+    <footer class="footer text-center">
+        <a href="mailto:rubencanovaca@gmail.com" title="Mail me">Rubén Canovaca Nieto</a>
+    </footer>
+</div>

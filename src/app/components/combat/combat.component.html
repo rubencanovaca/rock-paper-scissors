@@ -1,17 +1,26 @@
-<section>
-    <div>
+<section class="row">
+    <div class="col text-center">
         <div *ngFor="let weapon of weapons"
-             [class.selected]="weapon.selected"
+             class="player weapon"
+             [class.selected]="weapon.selected && !game.over"
              (click)="onSelect(weapon)"
              [innerHTML]="getImage(weapon, players[0])">
         </div>
     </div>
-    <div>
-        <div *ngFor="let weapon of weapons">
-            <div *ngIf="weapon.selected" [innerHTML]="getImage(weapon, players[0])"></div>
+    <div class="col text-center align-self-center">
+        <div *ngIf="!game.over && game.selected" class="fight" (click)="onFight()">
+            <h1>Fight!</h1>
+        </div>
+        <div *ngIf="game.over">
+            <div *ngFor="let weapon of weapons">
+                <div *ngIf="weapon.selected" [innerHTML]="getImage(weapon, players[0])"></div>
+            </div>
+            <div *ngFor="let weapon of weapons">
+                <div *ngIf="weapon.id === game.computerChoice" [innerHTML]="getImage(weapon, players[1])"></div>
+            </div>
         </div>
     </div>
-    <div>
-        <div *ngFor="let weapon of weapons" [innerHTML]="getImage(weapon, players[1])"></div>
+    <div class="col text-center">
+        <div *ngFor="let weapon of weapons" class="weapon" [innerHTML]="getImage(weapon, players[1])"></div>
     </div>
 </section>
