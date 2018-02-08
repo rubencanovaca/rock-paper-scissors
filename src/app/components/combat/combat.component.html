@@ -1,0 +1,17 @@
+<section>
+    <div>
+        <div *ngFor="let weapon of weapons"
+             [class.selected]="weapon.selected"
+             (click)="onSelect(weapon)"
+             [innerHTML]="getImage(weapon, players[0])">
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let weapon of weapons">
+            <div *ngIf="weapon.selected" [innerHTML]="getImage(weapon, players[0])"></div>
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let weapon of weapons" [innerHTML]="getImage(weapon, players[1])"></div>
+    </div>
+</section>
