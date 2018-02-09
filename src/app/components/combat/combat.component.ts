@@ -15,7 +15,7 @@ export class CombatComponent implements OnInit {
     weapons = WEAPONS;
     imgUrl = '../../../assets/images';
     game = {
-        selected: false,
+        ready: false,
         countdown: 3,
         computerChoice: 0,
         winner: 0,
@@ -26,19 +26,33 @@ export class CombatComponent implements OnInit {
         return `<img class="img-fluid" src="${this.imgUrl}/${weapon.name.toLowerCase()}_player${player.id}.png" alt="${weapon.name}" />`;
     };
 
+    isWeaponSelected() {
+        return _.filter(this.weapons, 'selected').length > 0;
+    }
+
     onSelect(weapon: Weapon): void {
         if (!this.game.over) {
             _.each(this.weapons, (w) => {
                 w.selected = false;
             });
             weapon.selected = true;
-            this.game.selected = true;
+            this.game.ready = true;
         }
     }
 
     onFight() {
         this.game.computerChoice = 1;
         this.game.over = true;
+    }
+
+    onPlayAgain() {
+        this.game.ready = false;
+        this.game.computerChoice = 0;
+        this.game.winner = 0;
+        this.game.over = false;
+        _.each(this.weapons, (w) => {
+            w.selected = false;
+        });
     }
 
     constructor() {

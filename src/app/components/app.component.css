@@ -4,7 +4,12 @@ header {
 
 header h1 {
     padding: .5em;
+    color: rgba(10,60,150, 0.8);
+    text-shadow: 1px 2px 4px #f5f5f5, 0 0 0 #000, 1px 2px 4px #f5f5f5;
 }
+
+header h1::-moz-selection { background: #5af; color: #fff; text-shadow: none; }
+header h1::selection { background: #5af; color: #fff; text-shadow: none; }
 
 .container-fluid {
     margin: .5em 0 2em 0;

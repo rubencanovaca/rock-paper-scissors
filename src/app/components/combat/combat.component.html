@@ -8,19 +8,33 @@
         </div>
     </div>
     <div class="col text-center align-self-center">
-        <div *ngIf="!game.over && game.selected" class="fight" (click)="onFight()">
-            <h1>Fight!</h1>
+        <div *ngIf="!game.over"
+             class="fight"
+             [class.ready]="isWeaponSelected()"
+             (click)="onFight()">
+            <h1>{{isWeaponSelected() ? 'Fight' : 'Select'}}</h1>
         </div>
-        <div *ngIf="game.over">
+        <div *ngIf="game.over" class="game-over">
+            <div>Result</div>
             <div *ngFor="let weapon of weapons">
-                <div *ngIf="weapon.selected" [innerHTML]="getImage(weapon, players[0])"></div>
+                <div *ngIf="weapon.selected"
+                     class="weapon"
+                     [innerHTML]="getImage(weapon, players[0])">
+                </div>
             </div>
             <div *ngFor="let weapon of weapons">
-                <div *ngIf="weapon.id === game.computerChoice" [innerHTML]="getImage(weapon, players[1])"></div>
+                <div *ngIf="weapon.id === game.computerChoice"
+                     class="weapon"
+                     [innerHTML]="getImage(weapon, players[1])">
+                </div>
             </div>
+            <div (click)="onPlayAgain()">Play again</div>
         </div>
     </div>
     <div class="col text-center">
-        <div *ngFor="let weapon of weapons" class="weapon" [innerHTML]="getImage(weapon, players[1])"></div>
+        <div *ngFor="let weapon of weapons"
+             class="weapon"
+             [innerHTML]="getImage(weapon, players[1])">
+        </div>
     </div>
 </section>
