@@ -1,0 +1,10 @@
+<section class="weapons">
+    <div class="row">
+        <div *ngFor="let weapon of weapons"
+             class="col text-center weapon"
+             [class.selected]="getGame().weapons[0] === weapon.id && !isGameOver()"
+             (click)="onSelect(weapon.id)"
+             [innerHTML]="getWeaponImage(weapon.id, players[0].id)">
+        </div>
+    </div>
+</section>

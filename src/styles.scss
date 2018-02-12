@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+@import 'custom';
+
+html {
+
+    @include media-breakpoint-up(xs) {
+        font-size: 9px;
+    }
+
+    @include media-breakpoint-up(sm) {
+        font-size: 11px;
+    }
+
+    @include media-breakpoint-up(md) {
+        font-size: 13px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        font-size: 15px;
+    }
+
+    @include media-breakpoint-up(xl) {
+        font-size: 17px;
+    }
+
+    body {
+        background-image: url("./assets/background.png");
+
+        button {
+            cursor: pointer;
+        }
+    }
+}

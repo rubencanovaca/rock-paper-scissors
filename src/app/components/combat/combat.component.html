@@ -1,40 +1,46 @@
-<section class="row">
-    <div class="col text-center">
-        <div *ngFor="let weapon of weapons"
-             class="player weapon"
-             [class.selected]="weapon.selected && !game.over"
-             (click)="onSelect(weapon)"
-             [innerHTML]="getImage(weapon, players[0])">
+<section class="container-fluid combat">
+    <div class="row play">
+        <div *ngIf="!isGameOver()" class="col text-center game-start">
+            <div class="text-center align-middle action">
+                <div class="bg"></div>
+                <button type="button"
+                        class="btn btn-primary btn-{{isWeaponSelected() ? 'danger' : 'warning'}} btn-lg"
+                        [class.ready]="isWeaponSelected()"
+                        [disabled]="!isWeaponSelected()"
+                        (click)="onPlay()">
+                    <span>{{isWeaponSelected() ? 'Fight !' : 'Select'}}</span>
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="col text-center align-self-center">
-        <div *ngIf="!game.over"
-             class="fight"
-             [class.ready]="isWeaponSelected()"
-             (click)="onFight()">
-            <h1>{{isWeaponSelected() ? 'Fight' : 'Select'}}</h1>
-        </div>
-        <div *ngIf="game.over" class="game-over">
-            <div>Result</div>
-            <div *ngFor="let weapon of weapons">
-                <div *ngIf="weapon.selected"
-                     class="weapon"
-                     [innerHTML]="getImage(weapon, players[0])">
+        <div *ngIf="isGameOver()" class="col text-center game-over">
+            <div class="row play-again">
+                <div class="col text-center align-middle action">
+                    <div class="bg"></div>
+                    <button type="button"
+                            class="btn btn-primary btn-success btn-lg"
+                            (click)="onPlayAgain()">
+                        Replay
+                        <i></i>
+                    </button>
                 </div>
             </div>
-            <div *ngFor="let weapon of weapons">
-                <div *ngIf="weapon.id === game.computerChoice"
-                     class="weapon"
-                     [innerHTML]="getImage(weapon, players[1])">
+            <div class="row result">
+                <div class="col text-center message {{getResultType()}}">
+                    <span>{{getResultText()}}</span>
                 </div>
             </div>
-            <div (click)="onPlayAgain()">Play again</div>
         </div>
     </div>
-    <div class="col text-center">
-        <div *ngFor="let weapon of weapons"
-             class="weapon"
-             [innerHTML]="getImage(weapon, players[1])">
+    <div class="row weapons">
+        <div class="col">
+            <div class="text-center weapon"
+                 [innerHTML]="getWeaponImage(getGame().weapons[0], players[0].id)">
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center weapon"
+                 [innerHTML]="getWeaponImage(getGame().weapons[1], players[1].id)">
+            </div>
         </div>
     </div>
 </section>

@@ -1,13 +1,13 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Player} from '../../classes/player';
+import {Data} from '../../classes/data';
 
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
-    styleUrls: ['./history.component.css']
+    styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-    @Input() players: Player;
+    @Input() data: Data;
 
     constructor() {
     }

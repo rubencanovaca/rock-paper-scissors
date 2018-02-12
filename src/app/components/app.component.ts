@@ -1,20 +1,19 @@
 import {Component} from '@angular/core';
-import {Player} from '../classes/player';
+import {Data} from '../classes/data';
+import {AppService} from '../app.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
     title = 'Rock Paper Scissors';
-    players: Player[] = [{
-        id: 1,
-        name: 'You',
-        score: 0
-    }, {
-        id: 2,
-        name: 'Computer',
-        score: 0
-    }];
+    owner = 'Rubén Canovaca Nieto';
+    email = 'rubencanovaca@gmail.com';
+    data: Data;
+
+    constructor(private appService: AppService) {
+        this.data = appService.getData();
+    }
 }

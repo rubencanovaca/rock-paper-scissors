@@ -1,0 +1,12 @@
+.weapons {
+    margin: 1.5em 1em 1em 1em;
+
+    .weapon {
+        cursor: pointer;
+        opacity: .5;
+
+        &.selected {
+            opacity: .75;
+        }
+    }
+}
