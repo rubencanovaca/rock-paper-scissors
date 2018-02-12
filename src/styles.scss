@@ -4,6 +4,11 @@
 @import 'custom';
 
 html {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     @include media-breakpoint-up(xs) {
         font-size: 9px;

@@ -1,11 +1,17 @@
 .container-fluid {
-    margin-top: 10px;
 
     h4 {
+        font-family: "Passero One", Helvetica, sans-serif;
         text-shadow: 0 0 20px rgba(10, 60, 150, 0.4);
     }
 
     h2 {
+        font-family: Impact, sans-serif;
         text-shadow: 0 0 20px rgba(10, 60, 150, 0.6);
+        -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+        transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
     }
+
 }

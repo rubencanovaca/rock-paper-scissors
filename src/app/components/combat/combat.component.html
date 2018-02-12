@@ -1,20 +1,26 @@
 <section class="container-fluid combat">
     <div class="row play">
         <div *ngIf="!isGameOver()" class="col text-center game-start">
-            <div class="text-center align-middle action">
+            <div *ngIf="!isWeaponSelected()" class="text-center align-middle select">
+                Select your weapon
+            </div>
+            <div *ngIf="isWeaponSelected()" class="text-center align-middle fight">
                 <div class="bg"></div>
                 <button type="button"
-                        class="btn btn-primary btn-{{isWeaponSelected() ? 'danger' : 'warning'}} btn-lg"
-                        [class.ready]="isWeaponSelected()"
-                        [disabled]="!isWeaponSelected()"
+                        class="btn btn-primary btn-danger btn-lg"
                         (click)="onPlay()">
-                    <span>{{isWeaponSelected() ? 'Fight !' : 'Select'}}</span>
+                    <span>Fight !</span>
                 </button>
             </div>
         </div>
         <div *ngIf="isGameOver()" class="col text-center game-over">
+            <div class="row result">
+                <div class="col text-center message {{getResultType()}}">
+                    <span>{{getResultText()}}</span>
+                </div>
+            </div>
             <div class="row play-again">
-                <div class="col text-center align-middle action">
+                <div class="col text-center align-middle">
                     <div class="bg"></div>
                     <button type="button"
                             class="btn btn-primary btn-success btn-lg"
@@ -22,11 +28,6 @@
                         Replay
                         <i></i>
                     </button>
-                </div>
-            </div>
-            <div class="row result">
-                <div class="col text-center message {{getResultType()}}">
-                    <span>{{getResultText()}}</span>
                 </div>
             </div>
         </div>
@@ -42,5 +43,6 @@
                  [innerHTML]="getWeaponImage(getGame().weapons[1], players[1].id)">
             </div>
         </div>
+        <div class="vs" [class.ready]="isWeaponSelected() && !isGameOver()">VS</div>
     </div>
 </section>

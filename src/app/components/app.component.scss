@@ -6,24 +6,15 @@ header {
     box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.4);
 
     h1 {
-        padding: .1em .2em .3em .2em;
+        font-family: "Passero One", Helvetica, sans-serif;
         color: rgba(10, 60, 150, 0.8);
+        padding: .1em .2em .2em .2em;
         text-shadow: 1px 2px 4px #ffffff, 0 0 0 #000, 1px 2px 4px #ffffff;
-
-        &::-moz-selection {
-            background: #5af;
-            color: #fff;
-            text-shadow: none;
-        }
-        &::selection {
-            background: #5af;
-            color: #fff;
-            text-shadow: none;
-        }
     }
 }
 
 main {
+    margin-top: 2em;
 }
 
 footer {
