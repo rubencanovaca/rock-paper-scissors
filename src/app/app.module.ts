@@ -1,12 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 
 import {AppService} from './app.service';
 import {PlayerService} from './services/player.service';
 import {WeaponService} from './services/weapon.service';
-import {GameService} from './services/game.service';
+import {RoundService} from './services/round.service';
 
-import {AppComponent} from './components/app.component';
+import {AppComponent} from './app.component';
 import {WeaponsComponent} from './components/weapons/weapons.component';
 import {CombatComponent} from './components/combat/combat.component';
 import {HistoryComponent} from './components/history/history.component';
@@ -19,13 +20,14 @@ import {HistoryComponent} from './components/history/history.component';
         HistoryComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        FormsModule
     ],
     providers: [
         AppService,
         PlayerService,
         WeaponService,
-        GameService
+        RoundService
     ],
     bootstrap: [AppComponent]
 })

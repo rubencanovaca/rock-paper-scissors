@@ -1,9 +1,10 @@
 import {Player} from './player';
 import {Weapon} from './weapon';
-import {Game} from './game';
+import {Round} from './round';
 
 export class Data {
     players: Player[];
     weapons: Weapon[];
-    games: Game[];
+    rounds: Round[];
+    maxRounds: number;
 }

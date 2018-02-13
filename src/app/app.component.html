@@ -1,0 +1,58 @@
+<header class="sticky-top">
+    <h1 class="text-center">{{title}}</h1>
+</header>
+<main class="container-fluid">
+    <div *ngIf="submitted" class="container round">
+        <app-history [data]="data"></app-history>
+        <app-combat [data]="data"></app-combat>
+        <app-weapons *ngIf="!roundCompleted()" [data]="data"></app-weapons>
+    </div>
+    <div *ngIf="!submitted" class="container text-center settings">
+        <form (ngSubmit)="onSubmit()" #settingsForm="ngForm">
+            <div class="row justify-content-center" [class.has-danger]="!name.valid && !name.pristine">
+                <div class="col-8">
+                    <input #name="ngModel"
+                           class="form-control form-control-lg text-center"
+                           name="name"
+                           type="text"
+                           [(ngModel)]="data.players[0].name"
+                           placeholder="Enter your name"
+                           required>
+                    <div [class.invisible]="name.valid || name.pristine" class="text-muted text-danger">
+                        Sorry, is required
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="row justify-content-center">
+                        <label class="col-form-label col-form-label-lg">Rounds</label>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="btn-group btn-group-lg" role="group" data-toggle="buttons">
+                            <label *ngFor="let r of rounds"
+                                   class="btn btn-secondary"
+                                   [class.active]="r === selectedRounds"
+                                   (click)="selectedRounds = r">
+                                <input type="radio"
+                                       name="rounds"
+                                       [value]="r"
+                                       [checked]="r === selectedRounds"
+                                       [(ngModel)]="selectedRounds">
+                                {{r}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="!settingsForm.form.valid">
+                    Play
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer class="footer text-center">
+    <a href="mailto:{{email}}" title="Mail me">{{owner}}</a>
+</footer>

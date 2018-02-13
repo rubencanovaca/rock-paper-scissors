@@ -2,21 +2,22 @@ import {Injectable} from '@angular/core';
 import {Data} from './classes/data';
 import {Player} from './classes/player';
 import {Weapon} from './classes/weapon';
-import {Game} from './classes/game';
+import {Round} from './classes/round';
 import {WeaponService} from './services/weapon.service';
 import {PlayerService} from './services/player.service';
-import {GameService} from './services/game.service';
+import {RoundService} from './services/round.service';
 import * as _ from 'lodash';
 
 @Injectable()
 export class AppService {
     DATA: Data;
 
-    constructor(private playerService: PlayerService, private weaponService: WeaponService, private gameService: GameService) {
+    constructor(private playerService: PlayerService, private weaponService: WeaponService, private roundService: RoundService) {
         this.DATA = {
             players: this.getPlayers(),
             weapons: this.getWeapons(),
-            games: this.getGames()
+            rounds: this.getRounds(),
+            maxRounds: 0
         };
     }
 
@@ -24,21 +25,38 @@ export class AppService {
         return this.DATA;
     }
 
-    onPlay(): [any] {
-        this.onFight();
-        const gamePlayers = this.getData().players;
-        const gameWeapons = this.getGame().weapons;
-        const winnerWeapon = this.getWinnerWeapon(gameWeapons);
+    fight(): [any] {
+        this.selectComputerWeapon();
+        const roundPlayers = this.getData().players;
+        const roundWeapons = this.getRound().weapons;
+        const winnerWeapon = this.getWinnerWeapon(roundWeapons);
         if (!_.isNull(winnerWeapon)) {
-            if (winnerWeapon.id === gameWeapons[0]) {
-                this.upScore(gamePlayers[0].id);
-                return [gamePlayers[0].id, `${this.getName(gamePlayers[0].id)} win!`];
-            } else if (winnerWeapon.id === gameWeapons[1]) {
-                this.upScore(gamePlayers[1].id);
-                return [gamePlayers[1].id, `${this.getName(gamePlayers[1].id)} win!`];
+            if (winnerWeapon.id === roundWeapons[0]) {
+                this.upScore(roundPlayers[0].id);
+                return [roundPlayers[0].id, `${this.getName(roundPlayers[0].id)} win!`];
+            } else if (winnerWeapon.id === roundWeapons[1]) {
+                this.upScore(roundPlayers[1].id);
+                return [roundPlayers[1].id, `${this.getName(roundPlayers[1].id)} win!`];
             }
         }
         return [null, 'It\'s a tie'];
+    }
+
+    // PlayerService
+    getPlayers(): Player[] {
+        return this.playerService.getPlayers();
+    }
+
+    getName(playerId: number): string {
+        return this.playerService.getName(playerId);
+    }
+
+    upScore(playerId: number): void {
+        this.playerService.upScore(playerId);
+    }
+
+    allRoundsCompleted(): boolean {
+        return this.playerService.allRoundsCompleted(this.DATA.maxRounds);
     }
 
     // WeaponService
@@ -54,46 +72,38 @@ export class AppService {
         return this.weaponService.getWinnerWeapon(weapons);
     }
 
-    // GameService
-    getGames(): Game[] {
-        return this.gameService.getGames();
+    // RoundService
+    getRounds(): Round[] {
+        return this.roundService.getRounds();
     }
 
-    getGame(): Game {
-        return this.gameService.getGame();
+    getRound(): Round {
+        return this.roundService.getRound();
     }
 
-    isGameOver(): boolean {
-        return this.gameService.isGameOver();
+    roundCompleted(): boolean {
+        return this.roundService.roundCompleted();
     }
 
-    isWeaponSelected(): boolean {
-        return this.gameService.isWeaponSelected();
+    weaponSelected(): boolean {
+        return this.roundService.weaponSelected();
     }
 
-    onSelect(weaponId): void {
-        this.gameService.onSelect(weaponId);
+    selectWeapon(weaponId): void {
+        this.roundService.selectWeapon(weaponId);
     }
 
-    onFight(): void {
-        this.gameService.onFight();
+    selectComputerWeapon(): void {
+        this.roundService.selectComputerWeapon();
     }
 
-    onPlayAgain(): void {
-        this.gameService.onPlayAgain();
+    nextRound(): void {
+        this.roundService.nextRound();
     }
 
-    // PlayerService
-    getPlayers(): Player[] {
-        return this.playerService.getPlayers();
-    }
-
-    getName(playerId: number): string {
-        return this.playerService.getName(playerId);
-    }
-
-    upScore(playerId: number): void {
-        this.playerService.upScore(playerId);
+    playAgain(): void {
+        this.roundService.playAgain();
+        this.playerService.resetScore();
     }
 
 }

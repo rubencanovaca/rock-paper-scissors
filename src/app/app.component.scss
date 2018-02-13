@@ -15,6 +15,16 @@ header {
 
 main {
     margin-top: 2em;
+
+    .settings {
+        font-family: "Passero One", Helvetica, sans-serif;
+        margin: 3em 0;
+
+        button[type=submit] {
+            font-family: "Passero One", Helvetica, sans-serif;
+            margin: 2em 0;
+        }
+    }
 }
 
 footer {

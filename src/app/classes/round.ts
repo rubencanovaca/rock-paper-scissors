@@ -1,4 +1,4 @@
-export class Game {
+export class Round {
     id: number;
     weapons: [number, number];
 }

@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Data} from '../../classes/data';
 import {Player} from '../../classes/player';
 import {Weapon} from '../../classes/weapon';
-import {Game} from '../../classes/game';
+import {Round} from '../../classes/round';
 import {AppService} from '../../app.service';
 
 @Component({
@@ -23,16 +23,16 @@ export class WeaponsComponent implements OnInit {
         this.weapons = this.data.weapons;
     }
 
-    getGame(): Game {
-        return this.appService.getGame();
+    getRound(): Round {
+        return this.appService.getRound();
     }
 
-    isGameOver(): boolean {
-        return this.appService.isGameOver();
+    roundCompleted(): boolean {
+        return this.appService.roundCompleted();
     }
 
-    onSelect(weaponId): void {
-        this.appService.onSelect(weaponId);
+    selectWeapon(weaponId): void {
+        this.appService.selectWeapon(weaponId);
     }
 
     getWeaponImage(weaponId, playerId): string {

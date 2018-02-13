@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Data} from '../../classes/data';
 import {Player} from '../../classes/player';
 import {Weapon} from '../../classes/weapon';
-import {Game} from '../../classes/game';
+import {Round} from '../../classes/round';
 import {AppService} from '../../app.service';
 
 @Component({
@@ -24,43 +24,53 @@ export class CombatComponent implements OnInit {
         this.weapons = this.data.weapons;
     }
 
-    getGame(): Game {
-        return this.appService.getGame();
+    getRound(): Round {
+        return this.appService.getRound();
     }
 
     getWeaponImage(weaponId, playerId): string {
         return this.appService.getWeaponImage(weaponId, playerId);
     }
 
-    isWeaponSelected(): boolean {
-        return this.appService.isWeaponSelected();
+    weaponSelected(): boolean {
+        return this.appService.weaponSelected();
     }
 
-    isGameOver(): boolean {
-        return this.appService.isGameOver();
+    roundCompleted(): boolean {
+        return this.appService.roundCompleted();
     }
 
-    onPlay(): void {
-        this.result = this.appService.onPlay();
+    fight(): void {
+        this.result = this.appService.fight();
     }
 
-    onPlayAgain(): void {
-        this.appService.onPlayAgain();
+    nextRound(): void {
+        this.appService.nextRound();
     }
 
     getResultType(): string {
-        const playerWinner = this.result[0];
-        switch (playerWinner) {
-            case 0:
+        const playerWinnerId = this.result[0];
+        if (playerWinnerId) {
+            const players = this.appService.getPlayers();
+            if (players[0].id === playerWinnerId) {
                 return 'win';
-            case 1:
+            } else if (players[1].id === playerWinnerId) {
                 return 'lose';
+            }
         }
         return 'tie';
     }
 
     getResultText(): string {
         return this.result[1];
+    }
+
+    allRoundsCompleted(): boolean {
+        return this.appService.allRoundsCompleted();
+    }
+
+    playAgain(): void {
+        this.appService.playAgain();
     }
 
 }

@@ -11,9 +11,8 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
 .combat {
 
     .play {
-        margin-bottom: 1em;
 
-        .game-start {
+        .round-start {
             height: 5em;
             position: relative;
 
@@ -28,11 +27,10 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
                 font-family: "Passero One", Helvetica, sans-serif;
                 font-size: 2em;
                 color: rgba(48, 48, 48, 1);
-                text-shadow: 1px 1px 0 rgba(250, 250, 250, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.67);
+                width: 100%;
             }
 
             .fight {
-                margin-top: 2em;
 
                 .btn {
                     font-family: "Passero One", Helvetica, sans-serif;
@@ -75,7 +73,7 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
             }
         }
 
-        .game-over {
+        .round-ended {
             height: 5em;
 
             .result {
@@ -85,7 +83,12 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
             }
 
             .play-again {
-                margin-top: 1em;
+                font-family: "Passero One", Helvetica, sans-serif;
+                margin-top: 2em;
+            }
+
+            .next-round {
+                margin-bottom: 2em;
 
                 .btn {
                     font-family: "Passero One", Helvetica, sans-serif;

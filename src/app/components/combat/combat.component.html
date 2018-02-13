@@ -1,48 +1,49 @@
 <section class="container-fluid combat">
+    <div class="row weapons">
+        <div class="col">
+            <div class="text-center weapon"
+                 [innerHTML]="getWeaponImage(getRound().weapons[0], players[0].id)">
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center weapon"
+                 [innerHTML]="getWeaponImage(getRound().weapons[1], players[1].id)">
+            </div>
+        </div>
+        <div class="vs" [class.ready]="weaponSelected() && !roundCompleted()">VS</div>
+    </div>
     <div class="row play">
-        <div *ngIf="!isGameOver()" class="col text-center game-start">
-            <div *ngIf="!isWeaponSelected()" class="text-center align-middle select">
+        <div *ngIf="!roundCompleted()" class="col text-center round-start">
+            <div *ngIf="!weaponSelected()" class="text-center align-middle select">
                 Select your weapon
             </div>
-            <div *ngIf="isWeaponSelected()" class="text-center align-middle fight">
-                <div class="bg"></div>
+            <div *ngIf="weaponSelected()" class="text-center align-middle fight">
                 <button type="button"
                         class="btn btn-primary btn-danger btn-lg"
-                        (click)="onPlay()">
+                        (click)="fight()">
                     <span>Fight !</span>
                 </button>
             </div>
         </div>
-        <div *ngIf="isGameOver()" class="col text-center game-over">
-            <div class="row result">
-                <div class="col text-center message {{getResultType()}}">
-                    <span>{{getResultText()}}</span>
-                </div>
-            </div>
-            <div class="row play-again">
+        <div *ngIf="roundCompleted()" class="col text-center round-ended">
+            <div class="row next-round">
                 <div class="col text-center align-middle">
-                    <div class="bg"></div>
-                    <button type="button"
+                    <button *ngIf="!allRoundsCompleted()" type="button"
                             class="btn btn-primary btn-success btn-lg"
-                            (click)="onPlayAgain()">
-                        Replay
+                            (click)="nextRound()">
+                        Next round
                         <i></i>
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row weapons">
-        <div class="col">
-            <div class="text-center weapon"
-                 [innerHTML]="getWeaponImage(getGame().weapons[0], players[0].id)">
+            <div class="row result">
+                <div class="col text-center message {{getResultType()}}" [class.final-text]="allRoundsCompleted()">
+                    <span>{{getResultText()}}</span>
+                </div>
+            </div>
+            <div *ngIf="allRoundsCompleted()" class="row justify-content-center play-again">
+                <button type="button" class="btn btn-link btn-lg" (click)="playAgain()">Play again</button>
             </div>
         </div>
-        <div class="col">
-            <div class="text-center weapon"
-                 [innerHTML]="getWeaponImage(getGame().weapons[1], players[1].id)">
-            </div>
-        </div>
-        <div class="vs" [class.ready]="isWeaponSelected() && !isGameOver()">VS</div>
     </div>
 </section>
