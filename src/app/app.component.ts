@@ -18,6 +18,7 @@ export class AppComponent {
 
     constructor(private appService: AppService) {
         this.data = appService.getData();
+        this.appService.preloadImages();
         this.selectedRounds = this.rounds[1];
     }
 

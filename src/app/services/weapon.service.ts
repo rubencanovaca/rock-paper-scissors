@@ -19,10 +19,14 @@ export class WeaponService {
         return _.filter(this.weapons, {id: weaponId})[0];
     }
 
+    getWeaponImgSrc(weaponName, playerId): string {
+        return `${this.imgUrl}/${weaponName.toLowerCase()}_player${playerId}.png`;
+    }
+
     getWeaponImage(weaponId, playerId): string {
         const weapon = this.getWeapon(weaponId);
         const weaponName = weapon ? weapon.name : '';
-        return `<img class="img-fluid" src="${this.imgUrl}/${weaponName.toLowerCase()}_player${playerId}.png" alt="${weaponName}" />`;
+        return `<img class="img-fluid" src="${this.getWeaponImgSrc(weaponName, playerId)}" alt="${weaponName}" />`;
     }
 
     getWinnerWeapon(weapons: [number]): Weapon {

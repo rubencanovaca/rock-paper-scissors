@@ -52,7 +52,7 @@ export class RoundService {
         this.refreshRound();
     }
 
-    playAgain(): void {
+    resetRounds(): void {
         this.rounds = [{
             id: 0,
             weapons: [0, 0]

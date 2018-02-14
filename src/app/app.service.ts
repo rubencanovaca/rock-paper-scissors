@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ResourceProvider} from 'angular2-resource-preloader';
 import {Data} from './classes/data';
 import {Player} from './classes/player';
 import {Weapon} from './classes/weapon';
@@ -12,7 +13,12 @@ import * as _ from 'lodash';
 export class AppService {
     DATA: Data;
 
-    constructor(private playerService: PlayerService, private weaponService: WeaponService, private roundService: RoundService) {
+    constructor(
+        private playerService: PlayerService,
+        private weaponService: WeaponService,
+        private roundService: RoundService,
+        private resourceProvider: ResourceProvider
+    ) {
         this.DATA = {
             players: this.getPlayers(),
             weapons: this.getWeapons(),
@@ -42,6 +48,13 @@ export class AppService {
         return [null, 'It\'s a tie'];
     }
 
+    allRoundsCompleted(): boolean {
+        const players = this.DATA.players;
+        const rounds = this.DATA.rounds;
+        const maxRounds = this.DATA.maxRounds;
+        return players[0].score + players[1].score === maxRounds || (rounds.length === maxRounds && players[0].score !== players[1].score);
+    }
+
     // PlayerService
     getPlayers(): Player[] {
         return this.playerService.getPlayers();
@@ -55,16 +68,16 @@ export class AppService {
         this.playerService.upScore(playerId);
     }
 
-    allRoundsCompleted(): boolean {
-        return this.playerService.allRoundsCompleted(this.DATA.maxRounds);
-    }
-
     // WeaponService
     getWeapons(): Weapon[] {
         return this.weaponService.getWeapons();
     }
 
-    getWeaponImage(weaponId, playerId): string {
+    getWeaponImgSrc(weaponName: string, playerId: number): string {
+        return this.weaponService.getWeaponImgSrc(weaponName, playerId);
+    }
+
+    getWeaponImage(weaponId: number, playerId: number): string {
         return this.weaponService.getWeaponImage(weaponId, playerId);
     }
 
@@ -102,8 +115,24 @@ export class AppService {
     }
 
     playAgain(): void {
-        this.roundService.playAgain();
+        this.roundService.resetRounds();
+        this.DATA.rounds = this.roundService.getRounds();
         this.playerService.resetScore();
     }
 
+    // Preload
+    preloadImages(): void {
+        const images = [];
+        _.each(this.DATA.players, (player) => {
+            images.push(this.getWeaponImgSrc('', player.id));
+            _.each(this.DATA.weapons, (weapon) => {
+                images.push(this.getWeaponImgSrc(weapon.name, player.id));
+            });
+        });
+        _.each(images, (image) => {
+            this.resourceProvider.getImage(image).subscribe((img: HTMLImageElement) => {
+                console.log('loaded image from: ' + img.src);
+            });
+        });
+    }
 }

@@ -28,10 +28,6 @@ export class PlayerService {
         player.score = player.score + 1;
     }
 
-    allRoundsCompleted(maxRounds: number): boolean {
-        return _.some(this.players, {score: maxRounds});
-    }
-
     resetScore(): void {
         _.each(this.players, (p) => {
             p.score = 0;

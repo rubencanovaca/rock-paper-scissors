@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import {PreloadModule} from 'angular2-resource-preloader';
 
 import {AppService} from './app.service';
 import {PlayerService} from './services/player.service';
@@ -21,7 +22,8 @@ import {HistoryComponent} from './components/history/history.component';
     ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        PreloadModule
     ],
     providers: [
         AppService,
