@@ -41,7 +41,7 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
     .play {
 
         .round-start {
-            height: 5em;
+            height: 4em;
             position: relative;
 
             .select {
@@ -102,7 +102,7 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
         }
 
         .round-ended {
-            height: 5em;
+            height: 4em;
 
             .result {
                 font-family: "Passero One", Helvetica, sans-serif;
@@ -260,7 +260,21 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
             }
 
             .next-round {
-                margin-bottom: 2em;
+                margin-top: 2em;
+                -webkit-animation: grouUp .5s;
+                -moz-animation: grouUp .5s;
+                -o-animation: grouUp .5s;
+                animation: grouUp .5s;
+                -webkit-animation-delay: .25s;
+                -moz-animation-delay: .25s;
+                -o-animation-delay: .25s;
+                animation-delay: .25s;
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+                -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards;
 
                 .btn {
                     font-family: "Passero One", Helvetica, sans-serif;
@@ -375,11 +389,58 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
                         }
                     }
                 }
+
+                @-webkit-keyframes grouUp {
+                    from {
+                        -webkit-transform: scale(0);
+                    }
+                    to {
+                        -webkit-transform: scale(1);
+                    }
+                }
+                @-moz-keyframes grouUp {
+                    from {
+                        -moz-transform: scale(0);
+                    }
+                    to {
+                        -moz-transform: scale(1);
+                    }
+                }
+                @-o-keyframes grouUp {
+                    from {
+                        -o-transform: scale(0);
+                    }
+                    to {
+                        -o-transform: scale(1);
+                    }
+                }
+                @keyframes grouUp {
+                    from {
+                        transform: scale(0);
+                    }
+                    to {
+                        transform: scale(1);
+                    }
+                }
             }
 
             .play-again {
                 font-family: "Passero One", Helvetica, sans-serif;
                 margin-top: 2em;
+                -webkit-animation: grouUp .5s;
+                -moz-animation: grouUp .5s;
+                -o-animation: grouUp .5s;
+                animation: grouUp .5s;
+                -webkit-animation-delay: 1s;
+                -moz-animation-delay: 1s;
+                -o-animation-delay: 1s;
+                animation-delay: 1s;
+                -webkit-transform: scale(0);
+                -moz-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+                -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards;
             }
         }
     }

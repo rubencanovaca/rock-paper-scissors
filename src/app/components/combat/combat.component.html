@@ -26,26 +26,15 @@
             </div>
         </div>
         <div *ngIf="roundCompleted()" class="col text-center round-ended">
-            <div class="row next-round">
-                <div class="col text-center align-middle">
-                    <button *ngIf="!allRoundsCompleted()"
-                            type="button"
-                            class="btn btn-primary btn-{{getRounds().length >= data.maxRounds ? 'warning' : 'success'}} btn-lg"
-                            (click)="nextRound()">
-                        {{getRounds().length >= data.maxRounds ? 'Tiebreaker round' : 'Next round'}}
-                        <i></i>
-                    </button>
-                </div>
-            </div>
             <div class="row result">
                 <div class="col">
                     <div class="row mx-auto">
-                        <div class="col text-center round-result text {{getResultType()}}">
+                        <div class="col text-center align-middle round-result text {{getResultType()}}">
                             <span>{{getResultText()}}</span>
                         </div>
                     </div>
                     <div class="row justify-content-center" *ngIf="allRoundsCompleted()">
-                        <div class="col text-center final-result-text {{getFinalResultType()}}">
+                        <div class="col text-center align-middle final-result-text {{getFinalResultType()}}">
                             <span>{{getFinalResultText()}}</span>
                         </div>
                     </div>
@@ -58,6 +47,17 @@
                         (click)="playAgain()">
                     Play again
                 </button>
+            </div>
+            <div class="row next-round">
+                <div class="col text-center align-middle">
+                    <button *ngIf="!allRoundsCompleted()"
+                            type="button"
+                            class="btn btn-primary btn-{{getRounds().length >= data.maxRounds ? 'warning' : 'success'}} btn-lg"
+                            (click)="nextRound()">
+                        {{getRounds().length >= data.maxRounds ? 'Tiebreaker round' : 'Next round'}}
+                        <i></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
