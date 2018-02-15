@@ -13,12 +13,10 @@ import * as _ from 'lodash';
 export class AppService {
     DATA: Data;
 
-    constructor(
-        private playerService: PlayerService,
-        private weaponService: WeaponService,
-        private roundService: RoundService,
-        private resourceProvider: ResourceProvider
-    ) {
+    constructor(private playerService: PlayerService,
+                private weaponService: WeaponService,
+                private roundService: RoundService,
+                private resourceProvider: ResourceProvider) {
         this.DATA = {
             players: this.getPlayers(),
             weapons: this.getWeapons(),
