@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class PlayerService {
     players = PLAYERS;
+    uppedScore: number;
 
     constructor() {
     }
@@ -26,12 +27,22 @@ export class PlayerService {
     upScore(playerId: number): void {
         const player = this.getPlayer(playerId);
         player.score = player.score + 1;
+        this.uppedScore = player.id;
+    }
+
+    getUppedScore(): number {
+        return this.uppedScore;
+    }
+
+    resetUppedScore(): void {
+        this.uppedScore = 0;
     }
 
     resetScore(): void {
         _.each(this.players, (p) => {
             p.score = 0;
         });
+        this.resetUppedScore();
     }
 
 }

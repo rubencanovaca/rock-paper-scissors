@@ -31,6 +31,7 @@ export class AppService {
         return this.DATA;
     }
 
+    // Game logic
     fight(): [any] {
         this.selectComputerWeapon();
         const roundPlayers = this.getData().players;
@@ -52,7 +53,18 @@ export class AppService {
         const players = this.DATA.players;
         const rounds = this.DATA.rounds;
         const maxRounds = this.DATA.maxRounds;
-        return players[0].score + players[1].score === maxRounds || (rounds.length === maxRounds && players[0].score !== players[1].score);
+        return players[0].score + players[1].score === maxRounds ||
+            (rounds.length === maxRounds && players[0].score !== players[1].score) ||
+            (players[0].score !== players[1].score &&
+                (players[0].score > (maxRounds - rounds.length) || players[1].score > (maxRounds - rounds.length)));
+    }
+
+    getFinalResult(): [any] {
+        const players = this.DATA.players;
+        if (players[0].score > players[1].score) {
+            return [players[0].id, `You win!`];
+        }
+        return [players[1].id, `You lose!`];
     }
 
     // PlayerService
@@ -66,6 +78,13 @@ export class AppService {
 
     upScore(playerId: number): void {
         this.playerService.upScore(playerId);
+    }
+
+    getUppedScore(): number {
+        if (this.allRoundsCompleted()) {
+            return this.getFinalResult()[0];
+        }
+        return this.playerService.getUppedScore();
     }
 
     // WeaponService
@@ -112,6 +131,8 @@ export class AppService {
 
     nextRound(): void {
         this.roundService.nextRound();
+        this.DATA.rounds = this.roundService.getRounds();
+        this.playerService.resetUppedScore();
     }
 
     playAgain(): void {
@@ -120,7 +141,7 @@ export class AppService {
         this.playerService.resetScore();
     }
 
-    // Preload
+    // Preload helper
     preloadImages(): void {
         const images = [];
         _.each(this.DATA.players, (player) => {

@@ -28,6 +28,10 @@ export class CombatComponent implements OnInit {
         return this.appService.getRound();
     }
 
+    getRounds(): Round[] {
+        return this.appService.getRounds();
+    }
+
     getWeaponImage(weaponId, playerId): string {
         return this.appService.getWeaponImage(weaponId, playerId);
     }
@@ -67,6 +71,19 @@ export class CombatComponent implements OnInit {
 
     allRoundsCompleted(): boolean {
         return this.appService.allRoundsCompleted();
+    }
+
+    getFinalResultType(): string {
+        const playerWinnerId = this.appService.getFinalResult()[0];
+        const players = this.appService.getPlayers();
+        if (players[0].id === playerWinnerId) {
+            return 'win';
+        }
+        return 'lose';
+    }
+
+    getFinalResultText(): string {
+        return this.appService.getFinalResult()[1];
     }
 
     playAgain(): void {

@@ -1,9 +1,15 @@
 <section class="container-fluid">
     <div class="row">
         <div *ngFor="let player of data.players" class="col">
-            <div class="text-center">
-                <h3 class="text-muted">{{player.name}}</h3>
-                <h1 class="text-muted">{{player.score}}</h1>
+            <div [@winner]="uppedScore(player.id) ? 'winner' : 'normal'"
+                 class="text-center">
+                <h3 [class.text-muted]="!uppedScore(player.id)">
+                    {{player.name}}
+                </h3>
+                <h1 [@uppedScore]="uppedScore(player.id) ? 'upped' : 'normal'"
+                    [class.text-muted]="!uppedScore(player.id)">
+                    {{player.score}}
+                </h1>
             </div>
         </div>
     </div>

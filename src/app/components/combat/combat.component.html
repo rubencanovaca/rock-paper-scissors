@@ -28,21 +28,36 @@
         <div *ngIf="roundCompleted()" class="col text-center round-ended">
             <div class="row next-round">
                 <div class="col text-center align-middle">
-                    <button *ngIf="!allRoundsCompleted()" type="button"
-                            class="btn btn-primary btn-success btn-lg"
+                    <button *ngIf="!allRoundsCompleted()"
+                            type="button"
+                            class="btn btn-primary btn-{{getRounds().length >= data.maxRounds ? 'warning' : 'success'}} btn-lg"
                             (click)="nextRound()">
-                        Next round
+                        {{getRounds().length >= data.maxRounds ? 'Tiebreaker round' : 'Next round'}}
                         <i></i>
                     </button>
                 </div>
             </div>
             <div class="row result">
-                <div class="col text-center message {{getResultType()}}" [class.final-text]="allRoundsCompleted()">
-                    <span>{{getResultText()}}</span>
+                <div class="col">
+                    <div class="row mx-auto">
+                        <div class="col text-center round-result text {{getResultType()}}">
+                            <span>{{getResultText()}}</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" *ngIf="allRoundsCompleted()">
+                        <div class="col text-center final-result-text {{getFinalResultType()}}">
+                            <span>{{getFinalResultText()}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div *ngIf="allRoundsCompleted()" class="row justify-content-center play-again">
-                <button type="button" class="btn btn-link btn-lg" (click)="playAgain()">Play again</button>
+            <div *ngIf="allRoundsCompleted()"
+                 class="row justify-content-center play-again">
+                <button type="button"
+                        class="btn btn-link btn-lg"
+                        (click)="playAgain()">
+                    Play again
+                </button>
             </div>
         </div>
     </div>

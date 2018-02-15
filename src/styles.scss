@@ -4,6 +4,7 @@
 @import 'custom';
 
 html {
+    overflow: hidden;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -11,23 +12,23 @@ html {
     user-select: none;
 
     @include media-breakpoint-up(xs) {
-        font-size: 9px;
+        font-size: 10px;
     }
 
     @include media-breakpoint-up(sm) {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     @include media-breakpoint-up(md) {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     @include media-breakpoint-up(lg) {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     @include media-breakpoint-up(xl) {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     body {
