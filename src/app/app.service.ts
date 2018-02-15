@@ -130,9 +130,9 @@ export class AppService {
     }
 
     nextRound(): void {
+        this.playerService.resetUppedScore();
         this.roundService.nextRound();
         this.DATA.rounds = this.roundService.getRounds();
-        this.playerService.resetUppedScore();
     }
 
     playAgain(): void {
