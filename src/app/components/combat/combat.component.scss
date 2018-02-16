@@ -15,6 +15,70 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
 
         .weapon {
             padding: 1em;
+
+            &.changed {
+                animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+                transform: translate3d(0, 0, 0);
+                backface-visibility: hidden;
+                perspective: 1000px;
+            }
+
+            @-webkit-keyframes shake {
+                10%, 90% {
+                    -webkit-transform: translate3d(-1px, 0, 0);
+                }
+                20%, 80% {
+                    -webkit-transform: translate3d(2px, 0, 0);
+                }
+                30%, 50%, 70% {
+                    -webkit-transform: translate3d(-4px, 0, 0);
+                }
+                40%, 60% {
+                    -webkit-transform: translate3d(4px, 0, 0);
+                }
+            }
+            @-moz-keyframes shake {
+                10%, 90% {
+                    -moz-transform: translate3d(-1px, 0, 0);
+                }
+                20%, 80% {
+                    -moz-transform: translate3d(2px, 0, 0);
+                }
+                30%, 50%, 70% {
+                    -moz-transform: translate3d(-4px, 0, 0);
+                }
+                40%, 60% {
+                    -moz-transform: translate3d(4px, 0, 0);
+                }
+            }
+            @-o-keyframes shake {
+                10%, 90% {
+                    -o-transform: translate3d(-1px, 0, 0);
+                }
+                20%, 80% {
+                    -o-transform: translate3d(2px, 0, 0);
+                }
+                30%, 50%, 70% {
+                    -o-transform: translate3d(-4px, 0, 0);
+                }
+                40%, 60% {
+                    -o-transform: translate3d(4px, 0, 0);
+                }
+            }
+            @keyframes shake {
+                10%, 90% {
+                    transform: translate3d(-1px, 0, 0);
+                }
+                20%, 80% {
+                    transform: translate3d(2px, 0, 0);
+                }
+                30%, 50%, 70% {
+                    transform: translate3d(-4px, 0, 0);
+                }
+                40%, 60% {
+                    transform: translate3d(4px, 0, 0);
+                }
+            }
         }
 
         .vs {
@@ -111,14 +175,16 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
 
                 .round-result {
                     opacity: 0;
-                    -webkit-animation: fadeIn .5s ease-in;
-                    -moz-animation: fadeIn .5s ease-in;
-                    -o-animation: fadeIn .5s ease-in;
-                    animation: fadeIn .5s ease-in;
-
-                    &.text {
-                        opacity: 1;
-                    }
+                    -webkit-animation: fadeIn .75s ease-in;
+                    -moz-animation: fadeIn .75s ease-in;
+                    -o-animation: fadeIn .75s ease-in;
+                    animation: fadeIn .75s ease-in;
+                    -webkit-animation-delay: .25s;
+                    -moz-animation-delay: .25s;
+                    -o-animation-delay: .25s;
+                    animation-delay: .25s;
+                    -webkit-animation-fill-mode: forwards;
+                    animation-fill-mode: forwards;
 
                     @-webkit-keyframes fadeIn {
                         from {
@@ -253,10 +319,10 @@ $ease-out-cubic: cubic-bezier(0.66, 0, 0, 1);
                 -moz-animation: grouUp .5s;
                 -o-animation: grouUp .5s;
                 animation: grouUp .5s;
-                -webkit-animation-delay: .25s;
-                -moz-animation-delay: .25s;
-                -o-animation-delay: .25s;
-                animation-delay: .25s;
+                -webkit-animation-delay: .75s;
+                -moz-animation-delay: .75s;
+                -o-animation-delay: .75s;
+                animation-delay: .75s;
                 -webkit-transform: scale(0);
                 -moz-transform: scale(0);
                 -o-transform: scale(0);

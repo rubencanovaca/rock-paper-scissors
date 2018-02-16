@@ -15,6 +15,7 @@ export class CombatComponent implements OnInit {
     players: Player[];
     weapons: Weapon[];
     result: [any];
+    prevWeapons = [0, 0];
 
     constructor(private appService: AppService) {
     }
@@ -32,7 +33,11 @@ export class CombatComponent implements OnInit {
         return this.appService.getRounds();
     }
 
-    getWeaponImage(weaponId, playerId): string {
+    changedWeapon(playerIndex: number): boolean {
+        return this.prevWeapons[playerIndex] !== this.getRound().weapons[playerIndex];
+    }
+
+    getWeaponImage(weaponId: number, playerId: number): string {
         return this.appService.getWeaponImage(weaponId, playerId);
     }
 
