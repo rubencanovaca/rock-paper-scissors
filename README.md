@@ -3,6 +3,8 @@ A mini game built with Angular.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
 
+ONLINE DEMO: `http://rock-paper-scissors.rubencanovaca.com`
+
 ## Setup environment
 
 Run `npm-install` to install module dependencies
@@ -30,3 +32,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## TODO
+-   Internationalization (Text labels)
+-   Remote service (NodeJS)
+-   Unit tests
